@@ -1,0 +1,30 @@
+{
+  "name": "stackid",
+  "version": "1.0.0",
+  "description": "A lightweight JavaScript package for managing stacked views like modals. Easily create, push, and pop while ensuring secure closure using unique IDs. Ideal for handling modal interactions, such as closing with specific triggers like 'esc' key, while maintaining a clean and efficient stack structure.",
+  "keywords": ["stack", "modal", "overlay", "unique", "dialog", "esc"],
+  "author": "Roy Teusink",
+  "license": "MIT",
+  "main": "dist/index.js",
+  "module": "dist/index.mjs",
+  "types": "dist/index.d.ts",
+  "scripts": {
+    "build": "tsup src/index.ts --format cjs,esm --dts",
+    "lint": "tsc",
+    "test": "vitest"
+  },
+  "homepage": "https://github.com/royteusink/stackid#readme",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/royteusink/stackid.git"
+  },
+  "bugs": {
+    "url": "https://github.com/royteusink/stackid/issues"
+  },
+  "devDependencies": {
+    "tsup": "^8.0.1",
+    "typescript": "^5.3.3",
+    "vitest": "^1.0.4"
+  },
+  "dependencies": {}
+}
