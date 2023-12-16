@@ -28,7 +28,7 @@ jobs:
         uses: borales/actions-yarn@v4
 
       - name: Install dependencies
-      - run: yarn install --frozen-lockfile
+        run: yarn install --frozen-lockfile
 
       - name: Create Release Pull Request or Publish
         id: changesets
