@@ -1,44 +1,58 @@
-export type StackId = number;
-export type Stack = StackId[];
+function genNextId<T>(prev?: T): T {
+  return (typeof prev === 'number' ? prev + 1 : 0) as T;
+}
 
-let stackId: StackId = 0;
+export function createStack<T = number>(nextId?: (prev?: T) => T) {
+  let curId: T | undefined;
+  const stack: T[] = [];
 
-export const stack: Stack = [];
-
-const _reset = (_stack: Stack) => {
-  _stack.length = 0;
-};
-
-const _push = (_stack: Stack) => {
-  const id = ++stackId;
-  _stack.push(id);
-  return id;
-};
-
-const _pop = (_stack: Stack, id: StackId) => {
-  if (_stack.length > 0 && _stack[_stack.length - 1] === id) {
-    return _stack.pop();
+  /**
+   * Checks if the provided identifier is on top of the stack.
+   * @param id
+   */
+  function onTopStack(id: T) {
+    return stack.length > 0 && stack[stack.length - 1] === id;
   }
-};
 
-/**
- * Push something to the stack.
- * @returns The stack id which needs to be stored in order to popStack.
- */
-export const pushStack = () => _push(stack);
+  /**
+   * Resets the stack, removing all identifiers.
+   */
+  function resetStack() {
+    curId = undefined;
+    stack.length = 0;
+  }
 
-/**
- * Pop from the stack.
- * @returns The stack id that has been popped of.
- */
-export const popStack = (id: StackId) => _pop(stack, id);
+  /**
+   * Pushes a new identifier onto the stack and returns the assigned stack id.
+   */
+  function pushStack() {
+    curId = nextId ? nextId(curId) : genNextId(curId);
+    stack.push(curId);
+    return curId;
+  }
 
-export const resetStack = () => _reset(stack);
+  /**
+   * Pops the identifier from the stack if it is on top.
+   * Returns the popped stack id or undefined if the stack is empty or the provided identifier is not on top.
+   * @param id
+   * @param force
+   */
+  function popStack(id: T, force?: boolean) {
+    if (onTopStack(id) || force) return stack.pop();
+  }
 
-export function createStack() {
-  const localStack: Stack = [];
-  const pushStack = () => _push(localStack);
-  const popStack = (id: StackId) => _pop(localStack, id);
-  const resetStack = () => _reset(localStack);
-  return { stack: localStack, pushStack, popStack, resetStack };
+  /**
+   * Get a immutable state of the current stack.
+   */
+  function getState(): T[] {
+    return [...stack];
+  }
+
+  return {
+    getState,
+    pushStack,
+    popStack,
+    resetStack,
+    onTopStack,
+  };
 }
