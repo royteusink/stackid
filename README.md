@@ -22,14 +22,14 @@ import { createStack } from 'stackid';
 // Create a stack
 const stack = createStack();
 
-const id1 = stack.pushStack(); // Pushes a new identifier (e.g., 0)
-const id2 = stack.pushStack(); // Pushes another identifier (e.g., 1)
+const id1 = stack.pushStack(); // Pushes a new identifier (e.g., 1)
+const id2 = stack.pushStack(); // Pushes another identifier (e.g., 2)
 
 console.log(stack.onTopStack(id2)); // true
 
 stack.popStack(id2); // Pops the identifier from the stack
 
-console.log(stack.getState()); // [0]
+console.log(stack.getState()); // [1]
 ```
 
 ### Managing the stack

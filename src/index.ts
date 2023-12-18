@@ -1,5 +1,5 @@
 function genNextId<T>(prev?: T): T {
-  return (typeof prev === 'number' ? prev + 1 : 0) as T;
+  return (typeof prev === 'number' ? prev + 1 : 1) as T;
 }
 
 export function createStack<T = number>(nextId?: (prev?: T) => T) {
