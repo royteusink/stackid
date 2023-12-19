@@ -1,5 +1,11 @@
 # stackid
 
+## 1.0.3
+
+### Patch Changes
+
+- 63144bf: Reduced the number of files published to npm
+
 ## 1.0.2
 
 ### Patch Changes
